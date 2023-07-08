@@ -17,7 +17,7 @@ router.get("/bill/:userId",getAllBills,()=>{
 });
 router.get("/bill/:id",getBill)
 
-router.put("/bill/:id",todoValidationMiddleware,updateBill)
+router.put("/bill/:id",billValidMiddleware,updateBill)
 
 router.post("/bill",todoValidationMiddleware,createBill,()=>{
     console.log("gdgdgdfd")

@@ -1,15 +1,18 @@
 import express from "express";
-
-const router = express.Router;
+import { loginValidationMid ,RegisterValidationMid} from './middleware/allauth-midware.js';
 import {register,login} from "../controllers/authController.js"
 
 
+const router = express.Router;
 
-router.post("/register",register,()=>{
+
+
+
+router.post("/register",RegisterValidationMid,register,()=>{
     console.log("gdgdgdfd")
 });
 
-router.post("/login",todoValidationMiddleware,login,()=>{
+router.post("/login",loginValidationMid,login,()=>{
     console.log("gdgdgdfd")
 });
 

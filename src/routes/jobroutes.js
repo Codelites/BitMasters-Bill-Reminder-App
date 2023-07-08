@@ -2,11 +2,9 @@
 
 import express from "express";
 import {createJob,updateJob,deleteJob} from "../controllers/jobControllwe.js"
+
+
 const router = express.Router;
-
-
-
-
 
 
 
