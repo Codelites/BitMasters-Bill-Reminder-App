@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer"
 import schedule from "node-schedule"
 import Job from "../models/job-model.js"
-
+import config from "../config/main.config.js"
 
 
 
@@ -12,10 +12,10 @@ try{
   res.status(201).json(job)
 
   if (runImmediately) {
-    // immediately
+  
     await fireJobLogic(job);
   } else {
-    // Schedule the job based on the runDate
+    //  To Schedule the job based on the runDate
     schedule.scheduleJob(runDate, async function () {
       await fireJobLogic(job);
     });
@@ -32,18 +32,17 @@ async function fireJobLogic(job) {
 
   // Email sending functionality using Nodemailer
   const transporter = nodemailer.createTransport({
-    // Configure the transporter options (e.g., SMTP settings)
-    // Example configuration for Gmail:
-    service: 'ymail',
+    
+    service: 'gmail',
     auth: {
-      user: 'emmanuelnwosu457@yahoo.com',
-      pass: '!Ean2k14',
+      user: config.mail_host,
+      pass: config.mail_pass,
     },
   });
 
   const mailOptions = {
-    from: 'emmanuelnwosu457@yahoo.com',
-    to: 'emmanueljoeemie@gmail.com.com',
+    from: config.mail_host,
+    to: config.mail_reci,
     subject: 'Scheduled Job Email',
     text: 'This is a scheduled job email.',
   };
@@ -55,7 +54,7 @@ async function fireJobLogic(job) {
     console.error('Error occurred while sending email:', error);
   }
 
-  // Additional operations related to the job can be performed here
+  
 }
 
 

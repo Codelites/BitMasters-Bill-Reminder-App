@@ -7,20 +7,11 @@ import Bill from "../models/bill-model.js"
 
 export const  getAllBills =async function(req,res,next){
     
-    // try {
-    //   const { userId } = req.params;
-    //   const bills = await Bill.find({ user: userId })//.populate('reminders');
-    //   res.json(bills);
-    // } catch (error) {
-    //   console.error(error);
-    //   res.status(500).json({ error: 'Server error' });
-    // }
   
 try{
-    const {userId} = req.body
-    // const userId = req.params; 
+    const {userId} = req.params
 
-  const bills = await Bill.find({ user: userId })
+  const bills = await Bill.find({ user: userId }).populate('reminders')
   res.json({ bills });
 }catch(error){
 
@@ -37,7 +28,8 @@ export const  getBill = async function (req,res,next){
 
         const billFound = await Bill.findById(id)
     if (!billFound) {
-     return res.status(404).json({ error: 'Bill not found' });
+     return res.status(404).json({ error: 'Bill not found' }).populate('reminders');
+
     } 
     res.status(200).json({
      success : true,
@@ -57,7 +49,7 @@ export const  getBill = async function (req,res,next){
 
 export const createBill = async function(req,res,next){
     try {
-        const { amount, type, dueDate, userId } = req.body;
+        const { amount, type, dueDate, user } = req.body;
         
         // if (error) {
         //   return res.status(400).json({ error: error.details[0].message });
@@ -66,7 +58,8 @@ export const createBill = async function(req,res,next){
           amount,
           type,
           dueDate,
-          user: userId,
+          user  
+          // : _id
         });
         console.log("hhgsgsgsg")
         res.status(201).json(bill);

@@ -1,17 +1,17 @@
-
-
-import express from "express";
+import{Router} from "express"
 import {createJob,updateJob,deleteJob} from "../controllers/jobControllwe.js"
+import { jobValidMiddleware } from "../middleware/userauth-midware.js";
+
+import authenticateJWT from "../middleware/JWTauthMiddleware.js";
+
+const jobRouter = Router();
 
 
-const router = express.Router;
+jobRouter.post("/job/:bill",authenticateJWT,jobValidMiddleware,createJob)
+
+jobRouter.put("/job/:id",jobValidMiddleware,updateJob)
+
+jobRouter.delete("/job/:id",authenticateJWT,deleteJob)
 
 
-
-
-
-router.post("/job/:bill",createJob)
-
-router.put("/job/:id",updateJob)
-
-router.delete("/job/:id",deleteJob)
+export default jobRouter

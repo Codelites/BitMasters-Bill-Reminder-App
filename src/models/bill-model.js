@@ -12,7 +12,7 @@ const billSchema = new mongoose.Schema(
       },
       dueDate: {
         type: Date,
-        required: true,
+        required: false,
       },
       Due: {
         type: Boolean,

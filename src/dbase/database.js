@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import config from "../config/main.config.js";
 
 
-const conData =  function(){
-    mongoose.connect("mongodb://localhost:27017/billreminder?retryWrites=true&w=majority"  , {
+const conData =  function(config){
+    mongoose.connect( config.database_uri , {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       } );

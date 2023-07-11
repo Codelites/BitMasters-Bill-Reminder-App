@@ -1,11 +1,12 @@
-import joi from "joi";
+import Joi from "joi";
 
-export const jobSchema = joi.object({
+ const jobSchema = Joi.object({
 
-    
-        bill: Joi.string().required(),
-        runDate: Joi.date().iso(), //.required(),
-        runImmediately: Joi.boolean().required(),
+    bill: Joi.string().required(),
+    runDate: Joi.date().iso(), //.required(),
+    runImmediately: Joi.boolean().required(),
       
 
 })
+
+export default jobSchema

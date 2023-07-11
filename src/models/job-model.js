@@ -9,7 +9,7 @@ const jobSchema = new mongoose.Schema(
     },
     runDate: {
       type: Date,
-      required: true,
+      // required: true,
     },
     runImmediately: {
       type: Boolean,

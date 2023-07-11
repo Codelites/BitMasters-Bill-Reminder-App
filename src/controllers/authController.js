@@ -1,5 +1,5 @@
 import User from "../models/user.js";
-
+import config from "../config/main.config.js";
 
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
@@ -20,7 +20,7 @@ export const register = async function(req,res,next){
       res.status(201).json({
         success : true,
         data : newUser
-    // res.status(201).json(newUser);
+    
        })
     console.log("newuser")
      
@@ -43,8 +43,9 @@ export const login = async function(req,res,next){
         return res.status(401).json({ error: 'Invalid credentials' });
       }
     
-    const token = jwt.sign({ userId: user._id }, 'secretKey');
+    const token = jwt.sign({ userId: user._id }, config.jwt_secret);
     res.json({ token });
+    
     }catch(error){
         
     console.error(error);
