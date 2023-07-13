@@ -66,7 +66,7 @@ export const updateJob =async function (req,res,next){
     const job = await Job.findByIdAndUpdate(
       id,
       { runDate, runImmediately },
-      
+      { new: true }
     );
   
     res.status(200).json(job);
@@ -79,7 +79,7 @@ export const updateJob =async function (req,res,next){
   
   export const  deleteJob = async function(req, res) {
     try {
-      const id = req.params;
+      const {id} = req.params;
   
       await Job.findByIdAndDelete(id);
   

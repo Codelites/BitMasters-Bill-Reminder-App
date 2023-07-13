@@ -9,7 +9,7 @@ const jobRouter = Router();
 
 jobRouter.post("/job/:bill",authenticateJWT,jobValidMiddleware,createJob)
 
-jobRouter.put("/job/:id",jobValidMiddleware,updateJob)
+jobRouter.put("/job/:id",authenticateJWT,jobValidMiddleware,updateJob)
 
 jobRouter.delete("/job/:id",authenticateJWT,deleteJob)
 
